@@ -44,8 +44,10 @@ function endGame() {
   setTimeout(() => {
     if (maxScore < score) {
       localStorage.setItem(maxScoreKey, score);
+      alert(`Поздравляем!\nУстановлен новый рекорд: ${score}!`);
+    } else {
+      alert(`Поздравляем!\nВаш счет: ${score}`);
     }
-    alert("Поздравляем! Выли игру!");
     location.reload();
   }, animationTime);
 }
@@ -95,6 +97,12 @@ function setMaxScore(_maxScore) {
   maxScoreEl.innerHTML = `${maxScore}`;
 }
 
+function onExitHandler() {
+  if (confirm("Выйти из игры?")) {
+    location.reload();
+  }
+}
+
 // Функция для переворачивания карточки
 function flipCard() {
   if (this.classList.contains("flip")) {
@@ -138,9 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", function (e) {
-  console.log(e.key, "e.key");
   if (e.key === " ") {
-    console.log(111, "111");
     const selectable = document.getElementsByClassName("selected")[0];
     if (selectable) {
       selectable.click();
