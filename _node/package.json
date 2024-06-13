@@ -1,0 +1,18 @@
+{
+  "name": "memo-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rename:rand": "node rename-files.js ../img/rand",
+    "rename:flowers": "node rename-files.js ../img/flowers",
+    "png-to-jpeg:rand": "node png-to-jpeg.js ../img/rand",
+    "png-to-jpeg:flowers": "node png-to-jpeg.js ../img/flowers"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "png-to-jpeg": "^1.0.1"
+  }
+}

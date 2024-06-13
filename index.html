@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Memory Game</title>
+<title>Мемо - Карточки</title>
 <link rel="stylesheet" href="style.css">
 <style>
 
@@ -15,18 +15,14 @@
     </div>
     <div>
         <div id="navigation">
-            <div class="exit-conteiner selectable" onclick="onExitHandler()"><img src="/img/ui/exit.png" alt="" srcset=""></div>
-            <div>score: <span id="scoreEl"></span></div>
-            <div>record: <span id="maxScoreEl"></span></div>
+            <div class="exit-conteiner selectable" id="exit-conteiner" onclick="onExitHandler()"><img src="/img/ui/exit.png" alt="" srcset=""></div>
+            <div>Очки: <span id="scoreEl"></span></div>
+            <div>Рекорд: <span id="maxScoreEl"></span></div>
         </div>
     </div>
-
-<script src="/index.js">
-
-</script>
-<script src="/keyboard-navigation.js">
-
-</script>
+    <script src="https://yandex.ru/games/sdk/v2"></script>
+    <script src="/index.js"></script>
+    <script src="/keyboard-navigation.js"></script>
 
 </body>
 </html>

@@ -99,12 +99,17 @@ function setMaxScore(_maxScore) {
 
 function onExitHandler() {
   if (confirm("Выйти из игры?")) {
-    location.reload();
+    if (window.ysdk) {
+      window.ysdk.dispatchEvent(ysdk.EVENTS.EXIT);
+    } else {
+      location.reload();
+    }
   }
 }
 
 // Функция для переворачивания карточки
 function flipCard() {
+  selectElement(this);
   if (this.classList.contains("flip")) {
     return;
   }
@@ -146,10 +151,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", function (e) {
-  if (e.key === " ") {
+  if (e.key === "Backspace" || e.key === "Escape") {
+    onExitHandler();
+  }
+  console.log(e.key, "e.key");
+  if (e.key === "Enter") {
     const selectable = document.getElementsByClassName("selected")[0];
     if (selectable) {
       selectable.click();
     }
   }
+});
+
+YaGames.init().then((ysdk) => {
+  console.log("Yandex SDK initialized");
+  window.ysdk = ysdk;
+  ysdk.onEvent(ysdk.EVENTS.HISTORY_BACK, () => {
+    onExitHandler();
+  });
 });
