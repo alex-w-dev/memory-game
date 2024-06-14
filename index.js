@@ -12,7 +12,7 @@ const pairScore = 5;
 const failScore = 1;
 const animationTime = 1000;
 const totalCards = 18;
-const totalpossibleImages = 26;
+const totalpossibleImages = 54;
 const maxScoreKey = "memory.maxScore";
 
 function startAnimation() {
@@ -20,6 +20,12 @@ function startAnimation() {
 }
 function stopAnimation() {
   animation = false;
+}
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
 function shuffle(array) {
@@ -54,6 +60,13 @@ function endGame() {
 
 // Функция для создания карточек
 function createCards() {
+  const newStyle = document.createElement("style");
+  newStyle.innerText = `.card .card-back { background-image: url('/img/flowers/${getRandomIntInclusive(
+    0,
+    5
+  )}.jpeg'); }`;
+  document.body.appendChild(newStyle);
+
   const imageIndexes = new Array(totalpossibleImages)
     .fill(null)
     .map((one, i) => i);
@@ -70,7 +83,7 @@ function createCards() {
       cardFace.className = "card-face card-content";
       cardFace.style.backgroundImage = `url('/img/rand/${
         imageIndexes[i % totalpossibleImages]
-      }.png')`;
+      }.jpeg')`;
       card.appendChild(cardFace);
 
       const cardBack = document.createElement("div");

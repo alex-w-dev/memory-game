@@ -59,7 +59,7 @@
     opacity: 0;
     }
     .card-back {
-    background-image: url('/img/kandinsky-download-1717438193102.png');
+    background-image: url('/img/flowers/5.jpeg');
     opacity: 1;
     }
 }
@@ -76,7 +76,7 @@ body {
     width: 100vw;
     height: 100vh;
 
-    background-image: url('/img/ui/bg.png');
+    background-image: url('/img/ui/bg.jpeg');
     background-position: center;
     background-size: cover;
     
