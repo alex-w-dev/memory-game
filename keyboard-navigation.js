@@ -1,94 +1,110 @@
-const selected = (window.selected = {
-  x: 0,
-  y: 0,
-  el: null,
-});
 const SELECTED = "selected";
 const SELECTABLE = "selectable";
 
-function selectSomeone() {
-  const allSelectable = getAllSelectable();
-  if (allSelectable.length) {
-    selectElement(allSelectable[0]);
-  }
-}
+class Selector {
+  selectionContainer = document;
+  selected = {
+    x: 0,
+    y: 0,
+    el: null,
+  };
 
-function selectElement(el) {
-  if (selected.el) {
-    selected.el.classList.remove(SELECTED);
-  }
-
-  const rect = el.getBoundingClientRect();
-  selected.el = el;
-  selected.x = rect.x;
-  selected.y = rect.y;
-  selected.el.classList.add(SELECTED);
-}
-
-function getAllSelectable() {
-  return Array.from(document.querySelectorAll(`.${SELECTABLE}`));
-}
-
-function keyDownHandler(e) {
-  if (e.key === "ArrowDown") {
-    selecteDirected("down");
+  constructor() {
+    document.addEventListener("keydown", (e) => {
+      this.keyDownHandler(e);
+    });
   }
 
-  if (e.key === "ArrowUp") {
-    selecteDirected("up");
+  selectSomeone() {
+    const allSelectable = this.getAllSelectable();
+    if (allSelectable.length) {
+      this.selectElement(allSelectable[0]);
+    }
   }
 
-  if (e.key === "ArrowLeft") {
-    selecteDirected("left");
+  selectElement(el) {
+    if (this.selected.el) {
+      this.selected.el.classList.remove(SELECTED);
+    }
+
+    const rect = el.getBoundingClientRect();
+    this.selected.el = el;
+    this.selected.x = rect.x;
+    this.selected.y = rect.y;
+    this.selected.el.classList.add(SELECTED);
   }
 
-  if (e.key === "ArrowRight") {
-    selecteDirected("right");
-  }
-}
-
-function selecteDirected(direction) {
-  const allSelectable = getAllSelectable().filter((el) => el !== selected.el);
-  const allBounds = allSelectable.map((el) => ({
-    bound: el.getBoundingClientRect(),
-    el: el,
-  }));
-  let x = selected.x;
-  let y = selected.y;
-  let directionBounds = [];
-
-  console.log(direction, "direction");
-
-  if (direction === "down") {
-    directionBounds = allBounds.filter((bound) => bound.bound.y > y);
+  setSelectionContainer(el) {
+    this.selectionContainer = el;
   }
 
-  if (direction === "up") {
-    directionBounds = allBounds.filter((bound) => bound.bound.y < y);
+  getAllSelectable() {
+    return Array.from(
+      this.selectionContainer.querySelectorAll(`.${SELECTABLE}`)
+    );
   }
 
-  if (direction === "left") {
-    directionBounds = allBounds.filter((bound) => bound.bound.x < x);
+  keyDownHandler(e) {
+    if (e.key === "ArrowDown") {
+      this.selecteDirected("down");
+    }
+
+    if (e.key === "ArrowUp") {
+      this.selecteDirected("up");
+    }
+
+    if (e.key === "ArrowLeft") {
+      this.selecteDirected("left");
+    }
+
+    if (e.key === "ArrowRight") {
+      this.selecteDirected("right");
+    }
   }
 
-  if (direction === "right") {
-    directionBounds = allBounds.filter((bound) => bound.bound.x > x);
-  }
+  selecteDirected(direction) {
+    const allSelectable = this.getAllSelectable().filter(
+      (el) => el !== this.selected.el
+    );
+    const allBounds = allSelectable.map((el) => ({
+      bound: el.getBoundingClientRect(),
+      el: el,
+    }));
+    let x = this.selected.x;
+    let y = this.selected.y;
+    let directionBounds = [];
 
-  if (directionBounds.length) {
-    const nearestBound = directionBounds.sort(
-      (bound1, bound2) =>
-        Math.abs(bound1.bound.x - x) +
-        Math.abs(bound1.bound.y - y) -
-        (Math.abs(bound2.bound.x - x) + Math.abs(bound2.bound.y - y))
-    )[0];
+    console.log(direction, "direction");
 
-    if (nearestBound) {
-      selectElement(nearestBound.el);
-      return;
+    if (direction === "down") {
+      directionBounds = allBounds.filter((bound) => bound.bound.y > y);
+    }
+
+    if (direction === "up") {
+      directionBounds = allBounds.filter((bound) => bound.bound.y < y);
+    }
+
+    if (direction === "left") {
+      directionBounds = allBounds.filter((bound) => bound.bound.x < x);
+    }
+
+    if (direction === "right") {
+      directionBounds = allBounds.filter((bound) => bound.bound.x > x);
+    }
+
+    if (directionBounds.length) {
+      const nearestBound = directionBounds.sort(
+        (bound1, bound2) =>
+          Math.abs(bound1.bound.x - x) +
+          Math.abs(bound1.bound.y - y) -
+          (Math.abs(bound2.bound.x - x) + Math.abs(bound2.bound.y - y))
+      )[0];
+
+      if (nearestBound) {
+        this.selectElement(nearestBound.el);
+        return;
+      }
     }
   }
 }
-
-document.addEventListener("keydown", keyDownHandler);
-setTimeout(selectSomeone, 100);
+window.Selector = Selector;

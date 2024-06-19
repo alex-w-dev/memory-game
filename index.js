@@ -14,6 +14,7 @@ const animationTime = 1000;
 const totalCards = 18;
 const totalpossibleImages = 54;
 const maxScoreKey = "memory.maxScore";
+const selector = new Selector();
 
 function startAnimation() {
   animation = true;
@@ -99,6 +100,8 @@ function createCards() {
     .join(" ");
   memoryGame.style.gridTemplateColumns = template;
   memoryGame.style.gridTemplateRows = template;
+  selector.setSelectionContainer(main);
+  selector.selectSomeone();
 }
 
 function setScore(_score) {
@@ -122,7 +125,7 @@ function onExitHandler() {
 
 // Функция для переворачивания карточки
 function flipCard() {
-  selectElement(this);
+  selector.selectElement(this);
   if (this.classList.contains("flip")) {
     return;
   }
@@ -134,7 +137,6 @@ function flipCard() {
 
   const lastOpened = openCards[0];
   if (lastOpened) {
-    console.log(1, "1");
     if (lastOpened.dataset.id === this.dataset.id) {
       pairs++;
       openCards = [];
