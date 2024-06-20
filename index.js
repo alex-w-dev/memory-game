@@ -11,7 +11,7 @@ const initialScore = 50;
 const pairScore = 5;
 const failScore = 1;
 const animationTime = 1000;
-const totalCards = 18;
+const totalCards = 8; // 2 / 8 / 18 / 32 / 50 / 72
 const totalpossibleImages = 54;
 const maxScoreKey = "memory.maxScore";
 const selector = new Selector();
@@ -51,11 +51,10 @@ function endGame() {
   setTimeout(() => {
     if (maxScore < score) {
       localStorage.setItem(maxScoreKey, score);
-      alert(`Поздравляем!\nУстановлен новый рекорд: ${score}!`);
+      openEndGameDialog(`Вы заработали ${score} очков, это новый рекорд!`);
     } else {
-      alert(`Поздравляем!\nВаш счет: ${score}`);
+      openEndGameDialog(`Вы заработали ${score} очков!`);
     }
-    location.reload();
   }, animationTime);
 }
 
@@ -116,9 +115,9 @@ function setMaxScore(_maxScore) {
 let exitDialogOpened = false;
 function toggleExitDialog() {
   if (exitDialogOpened) {
-    openExitDialog();
-  } else {
     closeExitDialog();
+  } else {
+    openExitDialog();
   }
   exitDialogOpened = !exitDialogOpened;
 }
@@ -132,6 +131,20 @@ function closeExitDialog() {
   selector.setSelectionContainer(main);
   selector.selectSomeone();
   exitWindow.style.display = "none";
+}
+
+function openEndGameDialog(text) {
+  selector.setSelectionContainer(endResult);
+  selector.selectSomeone();
+  endResultText.innerHTML = text;
+  endResult.style.display = "block";
+}
+function closeEndGameDialog() {
+  resetGame();
+  createCards();
+  selector.setSelectionContainer(main);
+  selector.selectSomeone();
+  endResult.style.display = "none";
 }
 
 function exitGame() {
@@ -191,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "Backspace" || e.key === "Escape") {
+    console.log(33333, "33333");
     toggleExitDialog();
   }
   console.log(e.key, "e.key");
