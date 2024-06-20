@@ -61,7 +61,7 @@ function endGame() {
 // Функция для создания карточек
 function createCards() {
   const newStyle = document.createElement("style");
-  newStyle.innerText = `.card .card-back { background-image: url('/img/flowers/${getRandomIntInclusive(
+  newStyle.innerText = `.card .card-back { background-image: url('./img/flowers/${getRandomIntInclusive(
     0,
     5
   )}.jpeg'); }`;
@@ -81,7 +81,7 @@ function createCards() {
 
       const cardFace = document.createElement("div");
       cardFace.className = "card-face card-content";
-      cardFace.style.backgroundImage = `url('/img/rand/${
+      cardFace.style.backgroundImage = `url('./img/rand/${
         imageIndexes[i % totalpossibleImages]
       }.jpeg')`;
       card.appendChild(cardFace);
