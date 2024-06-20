@@ -12,9 +12,6 @@
     align-items: center;
     justify-content: space-between;
     color: white;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2vmax;
-    font-weight: bold;
     gap: 1vmax;
     height: 83vmin;
 }
@@ -67,6 +64,10 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2vmax;
+    text-shadow: 0.2vmax 0.2vmax 0.3vmax black;
+    font-weight: bold;
 }
 
 #main {
@@ -105,3 +106,52 @@ body {
         box-shadow: 0px 0px 18px 9px #57ff00;
     }
 
+#exitWindow {
+    display: none;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vmax;
+}
+.text-button {
+    display: inline-block;
+    border-radius: 1vmax;
+    padding: 1vmax;
+    background-color: #04352e;
+    cursor: pointer;
+}
+
+.popup {
+    position: fixed;
+    display: flex;
+    background-color: #00000096;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+.exit-window-content {
+    width: 50vmax;
+    height: 20vmax;
+    background-image: url(/img/ui/jpeg/citten.jpeg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #0c473b;
+    border-radius: 1vmax;
+    box-shadow: 0px 0px 18px 7px black;
+    padding: 1vmax;
+    padding-left: 21vmax;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3vmax;
+}

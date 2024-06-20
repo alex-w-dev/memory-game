@@ -9,17 +9,37 @@
 
 </style>
 </head>
-<body id="main">
-    <div>
-        <div id="memoryGame"></div>
-    </div>
-    <div>
-        <div id="navigation">
-            <div class="exit-conteiner selectable" id="exit-conteiner" onclick="onExitHandler()"><img src="/img/ui/exit.png" alt="" srcset=""></div>
-            <div>Очки: <span id="scoreEl"></span></div>
-            <div>Рекорд: <span id="maxScoreEl"></span></div>
+<body >
+    <div id="main">
+        <div>
+            <div id="memoryGame"></div>
+        </div>
+        <div>
+            <div id="navigation">
+                <div class="exit-conteiner selectable" id="exit-conteiner" onclick="openExitDialog()"><img src="/img/ui/exit.png" alt="" srcset=""></div>
+                <div>Очки: <span id="scoreEl"></span></div>
+                <div>Рекорд: <span id="maxScoreEl"></span></div>
+            </div>
         </div>
     </div>
+    <div id="exitWindow">
+        <div class="popup">
+            <div class="exit-window-content">
+                <div>Выйти из игры?</div>
+                <div class="buttons-container">
+                    <div>
+                        <span class="selectable text-button"  onclick="closeExitDialog()" >Нет</span>
+                    </div>
+                    <div>
+                        <span class="selectable text-button" onclick="exitGame()">Да</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="popup-wall"></div>
+    </div>
+    
     <script src="https://yandex.ru/games/sdk/v2"></script>
     <script src="/keyboard-navigation.js"></script>
     <script src="/index.js"></script>

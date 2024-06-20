@@ -113,13 +113,37 @@ function setMaxScore(_maxScore) {
   maxScoreEl.innerHTML = `${maxScore}`;
 }
 
-function onExitHandler() {
-  if (confirm("Выйти из игры?")) {
-    if (window.ysdk) {
+let exitDialogOpened = false;
+function toggleExitDialog() {
+  if (exitDialogOpened) {
+    openExitDialog();
+  } else {
+    closeExitDialog();
+  }
+  exitDialogOpened = !exitDialogOpened;
+}
+
+function openExitDialog() {
+  selector.setSelectionContainer(exitWindow);
+  selector.selectSomeone();
+  exitWindow.style.display = "block";
+}
+function closeExitDialog() {
+  selector.setSelectionContainer(main);
+  selector.selectSomeone();
+  exitWindow.style.display = "none";
+}
+
+function exitGame() {
+  if (window.ysdk) {
+    try {
       window.ysdk.dispatchEvent(ysdk.EVENTS.EXIT);
-    } else {
+    } catch (e) {
+      console.error(e);
       location.reload();
     }
+  } else {
+    location.reload();
   }
 }
 
@@ -167,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "Backspace" || e.key === "Escape") {
-    onExitHandler();
+    toggleExitDialog();
   }
   console.log(e.key, "e.key");
   if (e.key === "Enter") {
@@ -182,6 +206,6 @@ YaGames.init().then((ysdk) => {
   console.log("Yandex SDK initialized");
   window.ysdk = ysdk;
   ysdk.onEvent(ysdk.EVENTS.HISTORY_BACK, () => {
-    onExitHandler();
+    toggleExitDialog();
   });
 });
