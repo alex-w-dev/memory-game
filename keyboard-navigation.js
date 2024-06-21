@@ -13,6 +13,9 @@ class Selector {
     document.addEventListener("keydown", (e) => {
       this.keyDownHandler(e);
     });
+    document.addEventListener("click", (e) => {
+      this.clickHandler(e);
+    });
   }
 
   selectSomeone() {
@@ -59,6 +62,18 @@ class Selector {
 
     if (e.key === "ArrowRight") {
       this.selecteDirected("right");
+    }
+  }
+
+  clickHandler(e) {
+    const closestSelectable = e.target.closest(`.${SELECTABLE}`);
+    if (
+      closestSelectable &&
+      this.getAllSelectable().includes(closestSelectable)
+    ) {
+      if (!this.selected.el !== closestSelectable) {
+        this.selectElement(closestSelectable);
+      }
     }
   }
 

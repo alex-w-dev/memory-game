@@ -173,7 +173,6 @@ function exitGame() {
 
 // Функция для переворачивания карточки
 function flipCard() {
-  selector.selectElement(this);
   if (this.classList.contains("flip")) {
     return;
   }
