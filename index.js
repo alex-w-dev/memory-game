@@ -6,15 +6,24 @@ let pairs = 0; // Счетчик пар
 let animation = false;
 let score = 0;
 let maxScore = 0;
+let totalPairs = 18; // 2 / 8 / 18 / 32 / 50 / 72
+let exitDialogOpened = false;
+let isMainMenu = true;
 
 const initialScore = 50;
 const pairScore = 5;
 const failScore = 1;
 const animationTime = 1000;
-const totalCards = 18; // 2 / 8 / 18 / 32 / 50 / 72
 const totalpossibleImages = 54;
 const maxScoreKey = "memory.maxScore";
 const selector = new Selector();
+
+const diffiults = [
+  { pairs: 2, src: "./img/flowers/1.jpeg", title: "Пупсик" },
+  { pairs: 8, src: "./img/flowers/2.jpeg", title: "Новичок" },
+  { pairs: 18, src: "./img/flowers/3.jpeg", title: "Специалист" },
+  { pairs: 32, src: "./img/flowers/4.jpeg", title: "Эксперт" },
+];
 
 function startAnimation() {
   animation = true;
@@ -47,9 +56,34 @@ function resetGame() {
   memoryGame.innerHTML = "";
 }
 
+function renderDifficult() {
+  const difficult = diffiults.find((d) => d.pairs === totalPairs);
+  difficultTitle.innerText = difficult.title;
+  difficultImage.src = difficult.src;
+}
+
+function setTotalPairs(pairs) {
+  totalPairs = pairs;
+  renderDifficult();
+}
+
+function increaseDifficult() {
+  const nextDifficult = diffiults.find((d) => d.pairs > totalPairs);
+  if (nextDifficult) {
+    setTotalPairs(nextDifficult.pairs);
+  }
+}
+function decreaseDifficult() {
+  const previousDifficult = diffiults.findLast((d) => d.pairs < totalPairs);
+  if (previousDifficult) {
+    setTotalPairs(previousDifficult.pairs);
+  }
+}
+
 function startNewGame() {
   main.style.display = "grid";
   menu.style.display = "none";
+  isMainMenu = false;
   resetGame();
   createCards();
   selector.setSelectionContainer(main);
@@ -59,6 +93,8 @@ function startNewGame() {
 function backToMainMenuHandler() {
   main.style.display = "none";
   menu.style.display = "flex";
+  isMainMenu = true;
+  renderDifficult();
   selector.setSelectionContainer(menu);
   selector.selectElement(mainMenuPlayBtn);
 }
@@ -87,7 +123,7 @@ function createCards() {
     .fill(null)
     .map((one, i) => i);
   shuffle(imageIndexes);
-  for (let i = 0; i < totalCards; i++) {
+  for (let i = 0; i < totalPairs; i++) {
     for (let j = 0; j < 2; j++) {
       const card = document.createElement("div");
       card.className = "card isSelectable";
@@ -126,14 +162,17 @@ function setMaxScore(_maxScore) {
   maxScoreEl.innerHTML = `${maxScore}`;
 }
 
-let exitDialogOpened = false;
-function toggleExitDialog() {
-  if (exitDialogOpened) {
-    closeExitDialog();
+function onBackHandler() {
+  if (isMainMenu) {
+    if (exitDialogOpened) {
+      closeExitDialog();
+    } else {
+      openExitDialog();
+    }
+    exitDialogOpened = !exitDialogOpened;
   } else {
-    openExitDialog();
+    backToMainMenuHandler();
   }
-  exitDialogOpened = !exitDialogOpened;
 }
 
 function openExitDialog() {
@@ -142,8 +181,13 @@ function openExitDialog() {
   exitWindow.style.display = "block";
 }
 function closeExitDialog() {
-  selector.setSelectionContainer(main);
-  selector.selectSomeone();
+  if (isMainMenu) {
+    backToMainMenuHandler();
+  } else {
+    selector.setSelectionContainer(main);
+    selector.selectSomeone();
+  }
+
   exitWindow.style.display = "none";
 }
 
@@ -189,7 +233,7 @@ function flipCard() {
       openCards = [];
       setScore(score + pairScore);
 
-      if (pairs === totalCards) {
+      if (pairs === totalPairs) {
         endGame();
       }
     } else {
@@ -213,10 +257,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "Backspace" || e.key === "Escape") {
-    console.log(33333, "33333");
-    toggleExitDialog();
+    onBackHandler();
   }
-  console.log(e.key, "e.key");
   if (e.key === "Enter") {
     const isSelectable = document.getElementsByClassName("selected")[0];
     if (isSelectable) {
@@ -229,6 +271,6 @@ YaGames.init().then((ysdk) => {
   console.log("Yandex SDK initialized");
   window.ysdk = ysdk;
   ysdk.onEvent(ysdk.EVENTS.HISTORY_BACK, () => {
-    toggleExitDialog();
+    onBackHandler();
   });
 });

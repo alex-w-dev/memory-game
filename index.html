@@ -14,19 +14,21 @@
         <div class="difficult-inputs">
           <div class="change-difficult">
             <img
+              onclick="decreaseDifficult()"
               src="./img/ui/svg/down-arrow-svgrepo-com.svg"
-              class="isSelectable arrow"
+              class="isSelectable arrow left"
               alt=""
             />
           </div>
           <div class="difficult-img-container">
-            <div>Нормальная</div>
+            <div id="difficultTitle">Нормальная</div>
             <img src="./img/flowers/0.jpeg" id="difficultImage" alt="" />
           </div>
           <div class="change-difficult">
             <img
+              onclick="increaseDifficult()"
               src="./img/ui/svg/down-arrow-svgrepo-com.svg"
-              class="isSelectable arrow"
+              class="isSelectable arrow right"
               alt=""
             />
           </div>
