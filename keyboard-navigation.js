@@ -1,5 +1,5 @@
 const SELECTED = "selected";
-const SELECTABLE = "selectable";
+const SELECTABLE = "isSelectable";
 
 class Selector {
   selectionContainer = document;

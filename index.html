@@ -1,62 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Мемо - Карточки</title>
-<link rel="stylesheet" href="./style.css">
-<style>
-
-</style>
-</head>
-<body >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Запоминалка от ИИ</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style></style>
+  </head>
+  <body>
     <div id="main">
-        <div>
-            <div id="memoryGame"></div>
+      <div>
+        <div id="memoryGame"></div>
+      </div>
+      <div>
+        <div id="navigation">
+          <!-- <div class="exit-conteiner isSelectable" id="exit-conteiner" onclick="openExitDialog()"><img src="./img/ui/1200px-Shutdown_button_green.svg.png" alt="" srcset=""></div> -->
+          <div>Очки: <span id="scoreEl"></span></div>
+          <div>Рекорд: <span id="maxScoreEl"></span></div>
         </div>
-        <div>
-            <div id="navigation">
-                <!-- <div class="exit-conteiner selectable" id="exit-conteiner" onclick="openExitDialog()"><img src="./img/ui/1200px-Shutdown_button_green.svg.png" alt="" srcset=""></div> -->
-                <div>Очки: <span id="scoreEl"></span></div>
-                <div>Рекорд: <span id="maxScoreEl"></span></div>
-            </div>
-        </div>
+      </div>
     </div>
     <div id="exitWindow">
-        <div class="popup">
-            <div class="exit-window-content">
-                <div>Выйти из игры?</div>
-                <div class="buttons-container">
-                    <div>
-                        <span class="selectable text-button"  onclick="closeExitDialog()" >Нет</span>
-                    </div>
-                    <div>
-                        <span class="selectable text-button" onclick="exitGame()">Да</span>
-                    </div>
-                </div>
-                
+      <div class="popup">
+        <div class="exit-window-content">
+          <div>Выйти из игры?</div>
+          <div class="buttons-container">
+            <div>
+              <span class="isSelectable text-button" onclick="closeExitDialog()"
+                >Нет</span
+              >
             </div>
+            <div>
+              <span class="isSelectable text-button" onclick="exitGame()"
+                >Да</span
+              >
+            </div>
+          </div>
         </div>
-        <div class="popup-wall"></div>
+      </div>
+      <div class="popup-wall"></div>
     </div>
     <div id="endResult">
-        <div class="popup">
-            <div class="exit-window-content happy">
-                <div id="endResultText">Вы заработали 100 очков, это новый рекорд!</div>
-                <div class="buttons-container">
-                    <div>
-                        <span class="selectable text-button"  onclick="closeEndGameDialog()" >ОК</span>
-                    </div>
-                </div>
-                
+      <div class="popup">
+        <div class="exit-window-content happy">
+          <div id="endResultText">
+            Вы заработали 100 очков, это новый рекорд!
+          </div>
+          <div class="buttons-container">
+            <div>
+              <span
+                class="isSelectable text-button"
+                onclick="closeEndGameDialog()"
+                >ОК</span
+              >
             </div>
+          </div>
         </div>
-        <div class="popup-wall"></div>
+      </div>
+      <div class="popup-wall"></div>
     </div>
-    
+
     <script src="https://yandex.ru/games/sdk/v2"></script>
     <script src="./keyboard-navigation.js"></script>
     <script src="./index.js"></script>
-
-</body>
+  </body>
 </html>

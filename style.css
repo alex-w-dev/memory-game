@@ -1,46 +1,45 @@
-
 #memoryGame {
-    display: grid;
-    grid-gap: 0.8vmax;
-    /* padding: 20px; */
-    width: 92vmin;
-    height: 92vmin;
+  display: grid;
+  grid-gap: 0.8vmax;
+  /* padding: 20px; */
+  width: 92vmin;
+  height: 92vmin;
 }
 #navigation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    gap: 2vmax;
-    height: 83vmin;
-    font-size: 3vmax;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 2vmax;
+  height: 83vmin;
+  font-size: 3vmax;
 }
 .card {
-    display:flex;
-    /* margin: 5px; */
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: transform 0.5s ease;
-    position: relative;
-    transform: rotateY(180deg);
+  display: flex;
+  /* margin: 5px; */
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  position: relative;
+  transform: rotateY(180deg);
 
-    * {
+  * {
     transition: all 0.5s ease;
-    }
-    
-    &.flip {
+  }
+
+  &.flip {
     transform: rotateY(0deg);
 
-        .card-face {
-    opacity: 1;
-        }
-        .card-back {
-    opacity: 0;
-        }
+    .card-face {
+      opacity: 1;
     }
+    .card-back {
+      opacity: 0;
+    }
+  }
 
-    .card-content {
+  .card-content {
     position: absolute;
     left: 0px;
     top: 0;
@@ -52,119 +51,119 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    }
-    .card-face {
+  }
+  .card-face {
     opacity: 0;
-    }
-    .card-back {
-    background-image: url('./img/flowers/5.jpeg');
+  }
+  .card-back {
+    background-image: url("./img/flowers/5.jpeg");
     opacity: 1;
-    }
+  }
 }
 
 body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2vmax;
-    /* text-shadow: 0.2vmax 0.2vmax 0.3vmax black; */
-    font-weight: bold;
+  padding: 0;
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2vmax;
+  /* text-shadow: 0.2vmax 0.2vmax 0.3vmax black; */
+  font-weight: bold;
 }
 
 #main {
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 9fr 3fr;
-    width: 100vw;
-    height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 9fr 3fr;
+  width: 100vw;
+  height: 100vh;
 
-    background-image: url('./img/ui/bg.jpeg');
-    background-position: center;
-    background-size: cover;
-    
+  background-image: url("./img/ui/bg.jpeg");
+  background-position: center;
+  background-size: cover;
 
-    & > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        &:last-of-type {
-            background-color: #00000096;
-        }
+    &:last-of-type {
+      background-color: #00000096;
     }
+  }
 }
 
 .exit-conteiner {
-    cursor: pointer;
+  cursor: pointer;
 
-    img {
-        width: 5vmax;
-        display: block;
-    }
-    /* align-self: self-end; */
+  img {
+    width: 5vmax;
+    display: block;
+  }
+  /* align-self: self-end; */
 }
 
-.selectable.selected {
-        box-shadow: 0px 0px 18px 9px #57ff00;
-        &.text-button {
-            box-shadow: 0px 0px 18px 9px #035f01;
-            /* color: green; */
-        }
-    }
+.isSelectable.selected {
+  box-shadow: 0px 0px 18px 9px #ff2600;
+  &.text-button {
+  box-shadow: 0px 0px 18px 9px #4f0000;
+  /* color: green; */
+  }
+}
 
-#exitWindow, #endResult {
-    display: none;
+#exitWindow,
+#endResult {
+  display: none;
 }
 
 .buttons-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2vmax;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vmax;
 }
 .text-button {
-    display: inline-block;
-    border-radius: 1vmax;
-    padding: 1vmax;
-    background-color: #df8300;
-    color: white;
-    cursor: pointer;
+  display: inline-block;
+  border-radius: 1vmax;
+  padding: 1vmax;
+  background-color: #df8300;
+  color: white;
+  cursor: pointer;
 }
 
 .popup {
-    position: fixed;
-    display: flex;
-    background-color: #00000096;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+  position: fixed;
+  display: flex;
+  background-color: #00000096;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 .exit-window-content {
-    width: 50vmax;
-    height: 20vmax;
-    background-image: url(./img/ui/jpeg/citten.jpeg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #f9db9c;
-    border-radius: 1vmax;
-    box-shadow: 0px 0px 18px 7px black;
-    padding: 1vmax;
-    padding-left: 21vmax;
-    box-sizing: border-box;
-    color: #910800;
-    /* text-shadow: 0.0vmax 0.0vmax 0.1vmax white; */
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3vmax;
+  width: 50vmax;
+  height: 20vmax;
+  background-image: url(./img/ui/jpeg/citten.jpeg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #f9db9c;
+  border-radius: 1vmax;
+  box-shadow: 0px 0px 18px 7px black;
+  padding: 1vmax;
+  padding-left: 21vmax;
+  box-sizing: border-box;
+  color: #910800;
+  /* text-shadow: 0.0vmax 0.0vmax 0.1vmax white; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3vmax;
 
-    &.happy {
+  &.happy {
     background-color: #f9db9c;
     background-image: url(./img/ui/jpeg/citten-happy.jpeg);
-    }
+  }
 }

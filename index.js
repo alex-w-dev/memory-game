@@ -74,7 +74,7 @@ function createCards() {
   for (let i = 0; i < totalCards; i++) {
     for (let j = 0; j < 2; j++) {
       const card = document.createElement("div");
-      card.className = "card selectable";
+      card.className = "card isSelectable";
       card.dataset.id = i;
       card.addEventListener("click", flipCard);
       cards.push(card);
@@ -209,9 +209,9 @@ document.addEventListener("keydown", function (e) {
   }
   console.log(e.key, "e.key");
   if (e.key === "Enter") {
-    const selectable = document.getElementsByClassName("selected")[0];
-    if (selectable) {
-      selectable.click();
+    const isSelectable = document.getElementsByClassName("selected")[0];
+    if (isSelectable) {
+      isSelectable.click();
     }
   }
 });
