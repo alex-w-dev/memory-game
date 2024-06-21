@@ -8,13 +8,57 @@
     <style></style>
   </head>
   <body>
+    <div id="menu">
+      <div class="difficult">
+        <div>Сложность:</div>
+        <div class="difficult-inputs">
+          <div class="change-difficult">
+            <img
+              src="./img/ui/svg/down-arrow-svgrepo-com.svg"
+              class="isSelectable arrow"
+              alt=""
+            />
+          </div>
+          <div class="difficult-img-container">
+            <div>Нормальная</div>
+            <img src="./img/flowers/0.jpeg" id="difficultImage" alt="" />
+          </div>
+          <div class="change-difficult">
+            <img
+              src="./img/ui/svg/down-arrow-svgrepo-com.svg"
+              class="isSelectable arrow"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="isSelectable text-button"
+          onclick="startNewGame()"
+          id="mainMenuPlayBtn"
+        >
+          Играть
+        </div>
+      </div>
+    </div>
     <div id="main">
       <div>
         <div id="memoryGame"></div>
       </div>
       <div>
         <div id="navigation">
-          <!-- <div class="exit-conteiner isSelectable" id="exit-conteiner" onclick="openExitDialog()"><img src="./img/ui/1200px-Shutdown_button_green.svg.png" alt="" srcset=""></div> -->
+          <div
+            class="exit-conteiner isSelectable"
+            id="exit-conteiner"
+            onclick="backToMainMenuHandler()"
+          >
+            <img
+              src="./img/ui/svg/left-arrow-svgrepo-com.svg"
+              alt=""
+              srcset=""
+            />
+          </div>
           <div>Очки: <span id="scoreEl"></span></div>
           <div>Рекорд: <span id="maxScoreEl"></span></div>
         </div>

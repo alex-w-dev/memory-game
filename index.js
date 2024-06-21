@@ -47,6 +47,22 @@ function resetGame() {
   memoryGame.innerHTML = "";
 }
 
+function startNewGame() {
+  main.style.display = "grid";
+  menu.style.display = "none";
+  resetGame();
+  createCards();
+  selector.setSelectionContainer(main);
+  selector.selectSomeone();
+}
+
+function backToMainMenuHandler() {
+  main.style.display = "none";
+  menu.style.display = "flex";
+  selector.setSelectionContainer(menu);
+  selector.selectElement(mainMenuPlayBtn);
+}
+
 function endGame() {
   setTimeout(() => {
     if (maxScore < score) {
@@ -99,8 +115,6 @@ function createCards() {
     .join(" ");
   memoryGame.style.gridTemplateColumns = template;
   memoryGame.style.gridTemplateRows = template;
-  selector.setSelectionContainer(main);
-  selector.selectSomeone();
 }
 
 function setScore(_score) {
@@ -140,10 +154,7 @@ function openEndGameDialog(text) {
   endResult.style.display = "block";
 }
 function closeEndGameDialog() {
-  resetGame();
-  createCards();
-  selector.setSelectionContainer(main);
-  selector.selectSomeone();
+  startNewGame();
   endResult.style.display = "none";
 }
 
@@ -198,8 +209,7 @@ function flipCard() {
 
 // Инициализация игры
 document.addEventListener("DOMContentLoaded", () => {
-  resetGame();
-  createCards();
+  backToMainMenuHandler();
 });
 
 document.addEventListener("keydown", function (e) {

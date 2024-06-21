@@ -70,6 +70,26 @@ body {
   font-weight: bold;
 }
 
+#menu {
+  overflow: hidden;
+  display: flex;
+  gap: 5vmax;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./img/ui/bg.jpeg");
+  background-position: center;
+  background-size: cover;
+
+  .text-button {
+    font-size: 5vmax;
+    padding: 2vmax;
+    border-radius: 2vmax;
+  }
+}
+
 #main {
   overflow: hidden;
   display: grid;
@@ -98,6 +118,7 @@ body {
   img {
     width: 5vmax;
     display: block;
+    /* transform: rotate(180deg); */
   }
   /* align-self: self-end; */
 }
@@ -105,8 +126,8 @@ body {
 .isSelectable.selected {
   box-shadow: 0px 0px 18px 9px #ff2600;
   &.text-button {
-  box-shadow: 0px 0px 18px 9px #4f0000;
-  /* color: green; */
+    box-shadow: 0px 0px 18px 9px #ffffff;
+    /* color: green; */
   }
 }
 
@@ -166,4 +187,36 @@ body {
     background-color: #f9db9c;
     background-image: url(./img/ui/jpeg/citten-happy.jpeg);
   }
+}
+
+.difficult {
+  display: flex;
+  flex-direction: column;
+  gap: 1vmax;
+  width: 50vmax;
+}
+.change-difficult {
+  width: 100%;
+  img {
+    width: 100%;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.difficult-img-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1vmax;
+
+  img {
+    width: 100%;
+  }
+}
+.difficult-inputs {
+  display: grid;
+  grid-gap: 1vmax;
+  grid-template-columns: 1fr 4fr 1fr;
+  width: 100%;
 }
