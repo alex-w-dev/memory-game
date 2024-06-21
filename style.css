@@ -125,10 +125,6 @@ body {
 
 .isSelectable.selected {
   box-shadow: 0px 0px 12px 13px #df8300;
-  &.text-button {
-    /* box-shadow: 0px 0px 18px 9px #ffffff; */
-    /* color: green; */
-  }
   z-index: 1;
 }
 
