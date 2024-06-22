@@ -8,6 +8,7 @@ let score = 0;
 let maxScore = 0;
 let totalPairs = 18; // 2 / 8 / 18 / 32 / 50 / 72
 let exitDialogOpened = false;
+let endGameDialogOpened = false;
 let isMainMenu = true;
 
 const initialScore = 50;
@@ -169,19 +170,24 @@ function onBackHandler() {
     } else {
       openExitDialog();
     }
-    exitDialogOpened = !exitDialogOpened;
   } else {
-    backToMainMenuHandler();
+    if (endGameDialogOpened) {
+      closeEndGameDialog();
+    } else {
+      backToMainMenuHandler();
+    }
   }
 }
 
 function openExitDialog() {
   exitWindow.style.display = "block";
+  exitDialogOpened = true;
   selector.setSelectionContainer(exitWindow);
   selector.selectSomeone();
 }
 function closeExitDialog() {
   exitWindow.style.display = "none";
+  exitDialogOpened = false;
 
   if (isMainMenu) {
     backToMainMenuHandler();
@@ -192,12 +198,14 @@ function closeExitDialog() {
 }
 
 function openEndGameDialog(text) {
+  endGameDialogOpened = true;
   endResultText.innerHTML = text;
   endResult.style.display = "block";
   selector.setSelectionContainer(endResult);
   selector.selectSomeone();
 }
 function closeEndGameDialog() {
+  endGameDialogOpened = false;
   startNewGame();
   endResult.style.display = "none";
 }
@@ -296,11 +304,15 @@ YaGames.init().then((ysdk) => {
 });
 
 function isTV() {
-  return true || (window.ysdk && window.ysdk.deviceInfo.type === "tv");
+  return window.ysdk && window.ysdk.deviceInfo.type === "tv";
 }
 
 function initClickEvents() {
   addClickEventListener(mainMenuPlayBtn, startNewGame);
   addClickEventListener(degreaseDifficultBtn, decreaseDifficult);
   addClickEventListener(increaseDifficultBtn, increaseDifficult);
+  addClickEventListener(exitConteiner, backToMainMenuHandler);
+  addClickEventListener(exitGameButtonNo, closeExitDialog);
+  addClickEventListener(exitGameButtonYes, exitGame);
+  addClickEventListener(closeEndGameDialogBtn, closeEndGameDialog);
 }

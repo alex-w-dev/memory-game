@@ -14,7 +14,7 @@
         <div class="difficult-inputs">
           <div class="change-difficult">
             <img
-              onclick="decreaseDifficult()"
+              id="degreaseDifficultBtn"
               src="./img/ui/svg/down-arrow-svgrepo-com.svg"
               class="vybirayemiy arrow left"
               alt=""
@@ -26,7 +26,7 @@
           </div>
           <div class="change-difficult">
             <img
-              onclick="increaseDifficult()"
+              id="increaseDifficultBtn"
               src="./img/ui/svg/down-arrow-svgrepo-com.svg"
               class="vybirayemiy arrow right"
               alt=""
@@ -35,13 +35,7 @@
         </div>
       </div>
       <div>
-        <div
-          class="vybirayemiy text-button"
-          onclick="startNewGame()"
-          id="mainMenuPlayBtn"
-        >
-          Играть
-        </div>
+        <div class="vybirayemiy text-button" id="mainMenuPlayBtn">Играть</div>
       </div>
     </div>
     <div id="main">
@@ -50,11 +44,7 @@
       </div>
       <div>
         <div id="navigation">
-          <div
-            class="exit-conteiner vybirayemiy"
-            id="exit-conteiner"
-            onclick="backToMainMenuHandler()"
-          >
+          <div class="exit-conteiner vybirayemiy" id="exitConteiner">
             <img
               src="./img/ui/svg/left-arrow-svgrepo-com.svg"
               alt=""
@@ -72,12 +62,12 @@
           <div>Выйти из игры?</div>
           <div class="buttons-container">
             <div>
-              <span class="vybirayemiy text-button" onclick="closeExitDialog()"
+              <span class="vybirayemiy text-button" id="exitGameButtonNo"
                 >Нет</span
               >
             </div>
             <div>
-              <span class="vybirayemiy text-button" onclick="exitGame()"
+              <span class="vybirayemiy text-button" id="exitGameButtonYes"
                 >Да</span
               >
             </div>
@@ -94,9 +84,7 @@
           </div>
           <div class="buttons-container">
             <div>
-              <span
-                class="vybirayemiy text-button"
-                onclick="closeEndGameDialog()"
+              <span class="vybirayemiy text-button" id="closeEndGameDialogBtn"
                 >ОК</span
               >
             </div>
