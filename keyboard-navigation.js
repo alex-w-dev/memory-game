@@ -1,5 +1,5 @@
-const SELECTED = "selected";
-const SELECTABLE = "isSelectable";
+const SELECTED = "yaVybran";
+const SELECTABLE = "vybirayemiy";
 
 class Selector {
   selectionContainer = document;

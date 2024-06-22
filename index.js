@@ -126,7 +126,7 @@ function createCards() {
   for (let i = 0; i < totalPairs; i++) {
     for (let j = 0; j < 2; j++) {
       const card = document.createElement("div");
-      card.className = "card isSelectable";
+      card.className = "card vybirayemiy";
       card.dataset.id = i;
       card.addEventListener("click", flipCard);
       cards.push(card);
@@ -260,9 +260,9 @@ document.addEventListener("keydown", function (e) {
     onBackHandler();
   }
   if (e.key === "Enter") {
-    const isSelectable = document.getElementsByClassName("selected")[0];
-    if (isSelectable) {
-      isSelectable.click();
+    const vybirayemiy = document.getElementsByClassName("yaVybran")[0];
+    if (vybirayemiy) {
+      vybirayemiy.click();
     }
   }
 });
