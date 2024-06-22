@@ -14,7 +14,7 @@
         <div class="difficult-inputs">
           <div class="change-difficult">
             <img
-              id="degreaseDifficultBtn"
+              onclick="decreaseDifficult()"
               src="./img/ui/svg/down-arrow-svgrepo-com.svg"
               class="vybirayemiy arrow left"
               alt=""
@@ -26,7 +26,7 @@
           </div>
           <div class="change-difficult">
             <img
-              id="increaseDifficultBtn"
+              onclick="increaseDifficult()"
               src="./img/ui/svg/down-arrow-svgrepo-com.svg"
               class="vybirayemiy arrow right"
               alt=""
@@ -52,7 +52,7 @@
         <div id="navigation">
           <div
             class="exit-conteiner vybirayemiy"
-            id="exitConteiner"
+            id="exit-conteiner"
             onclick="backToMainMenuHandler()"
           >
             <img
@@ -72,10 +72,7 @@
           <div>Выйти из игры?</div>
           <div class="buttons-container">
             <div>
-              <span
-                class="vybirayemiy text-button"
-                id="notExitGameBtn"
-                onclick="closeExitDialog()"
+              <span class="vybirayemiy text-button" onclick="closeExitDialog()"
                 >Нет</span
               >
             </div>
