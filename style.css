@@ -223,6 +223,7 @@ body {
   gap: 1vmin;
   img {
     width: 100%;
+    border-radius: 2vmin;
   }
 }
 .difficult-inputs {

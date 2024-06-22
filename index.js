@@ -20,10 +20,10 @@ const maxScoreKey = "memory.maxScore";
 const selector = new Selector();
 
 const diffiults = [
-  { pairs: 2, src: "./img/flowers/1.jpeg", title: "Пупсик" },
-  { pairs: 8, src: "./img/flowers/2.jpeg", title: "Новичок" },
-  { pairs: 18, src: "./img/flowers/3.jpeg", title: "Специалист" },
-  { pairs: 32, src: "./img/flowers/4.jpeg", title: "Эксперт" },
+  { pairs: 2, src: "./img/diff/0.jpeg", title: "Пупсик" },
+  { pairs: 8, src: "./img/diff/2.jpeg", title: "Новичок" },
+  { pairs: 18, src: "./img/diff/1.jpeg", title: "Специалист" },
+  { pairs: 32, src: "./img/diff/4.jpeg", title: "Эксперт" },
 ];
 
 function startAnimation() {
