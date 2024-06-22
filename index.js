@@ -278,3 +278,7 @@ YaGames.init().then((ysdk) => {
     exitConteiner.style.display = "none";
   }
 });
+
+degreaseDifficultBtn.addEventListener("click", decreaseDifficult);
+increaseDifficultBtn.addEventListener("click", increaseDifficult);
+mainMenuPlayBtn.addEventListener("click", startNewGame);
