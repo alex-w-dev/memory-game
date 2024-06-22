@@ -44,7 +44,7 @@ class Selector {
   getAllSelectable() {
     return Array.from(
       this.selectionContainer.querySelectorAll(`.${SELECTABLE}`)
-    );
+    ).filter((el) => el.checkVisibility());
   }
 
   keyDownHandler(e) {

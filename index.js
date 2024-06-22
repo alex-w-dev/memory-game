@@ -176,26 +176,26 @@ function onBackHandler() {
 }
 
 function openExitDialog() {
+  exitWindow.style.display = "block";
   selector.setSelectionContainer(exitWindow);
   selector.selectSomeone();
-  exitWindow.style.display = "block";
 }
 function closeExitDialog() {
+  exitWindow.style.display = "none";
+
   if (isMainMenu) {
     backToMainMenuHandler();
   } else {
     selector.setSelectionContainer(main);
     selector.selectSomeone();
   }
-
-  exitWindow.style.display = "none";
 }
 
 function openEndGameDialog(text) {
-  selector.setSelectionContainer(endResult);
-  selector.selectSomeone();
   endResultText.innerHTML = text;
   endResult.style.display = "block";
+  selector.setSelectionContainer(endResult);
+  selector.selectSomeone();
 }
 function closeEndGameDialog() {
   startNewGame();
@@ -268,9 +268,13 @@ document.addEventListener("keydown", function (e) {
 });
 
 YaGames.init().then((ysdk) => {
-  console.log("Yandex SDK initialized");
   window.ysdk = ysdk;
+
   ysdk.onEvent(ysdk.EVENTS.HISTORY_BACK, () => {
     onBackHandler();
   });
+
+  if (ysdk.deviceInfo.type === "tv") {
+    exitConteiner.style.display = "none";
+  }
 });

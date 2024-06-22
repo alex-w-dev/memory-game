@@ -18,7 +18,7 @@
 .card {
   display: flex;
   /* margin: 5px; */
-  border: 1px solid #ccc;
+  border: 0.2vmin solid #ccc;
   cursor: pointer;
   transition: transform 0.5s ease;
   position: relative;
@@ -124,8 +124,11 @@ body {
 }
 
 .vybirayemiy.yaVybran {
-  box-shadow: 0px 0px 12px 13px #df8300;
+  box-shadow: 0px 0px 1.2vmin 1.5vmin #df8300;
   z-index: 1;
+}
+.vybirayemiy:hover {
+  box-shadow: 0px 0px 1.2vmin 1.5vmin #df8300;
 }
 
 #exitWindow,
@@ -169,7 +172,7 @@ body {
   background-size: contain;
   background-color: #f9db9c;
   border-radius: 1vmax;
-  box-shadow: 0px 0px 18px 7px black;
+  box-shadow: 0px 0px 1.8vmin 0.7vmin black;
   padding: 1vmax;
   padding-left: 21vmax;
   box-sizing: border-box;
