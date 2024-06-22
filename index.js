@@ -128,7 +128,7 @@ function createCards() {
       const card = document.createElement("div");
       card.className = "card vybirayemiy";
       card.dataset.id = i;
-      card.addEventListener("click", flipCard);
+      addClickEventListener(card, flipCard);
       cards.push(card);
 
       const cardFace = document.createElement("div");
@@ -250,6 +250,21 @@ function flipCard() {
   }
 }
 
+function addClickEventListener(el, cb) {
+  if (isTV()) {
+    el.addEventListener("ownClick", cb);
+  } else {
+    el.addEventListener("click", cb);
+  }
+}
+function dispatchClickEvent(el) {
+  if (isTV()) {
+    el.dispatchEvent(new Event("ownClick", { target: el }));
+  } else {
+    el.click();
+  }
+}
+
 // Инициализация игры
 document.addEventListener("DOMContentLoaded", () => {
   backToMainMenuHandler();
@@ -260,9 +275,9 @@ document.addEventListener("keydown", function (e) {
     onBackHandler();
   }
   if (e.key === "Enter") {
-    const vybirayemiy = document.getElementsByClassName("yaVybran")[0];
-    if (vybirayemiy) {
-      vybirayemiy.click();
+    const selected = document.getElementsByClassName("yaVybran")[0];
+    if (selected) {
+      dispatchClickEvent(selected);
     }
   }
 });
@@ -274,7 +289,18 @@ YaGames.init().then((ysdk) => {
     onBackHandler();
   });
 
-  if (ysdk.deviceInfo.type === "tv") {
+  if (isTV()) {
     exitConteiner.style.display = "none";
   }
+  initClickEvents();
 });
+
+function isTV() {
+  return true || (window.ysdk && window.ysdk.deviceInfo.type === "tv");
+}
+
+function initClickEvents() {
+  addClickEventListener(mainMenuPlayBtn, startNewGame);
+  addClickEventListener(degreaseDifficultBtn, decreaseDifficult);
+  addClickEventListener(increaseDifficultBtn, increaseDifficult);
+}
