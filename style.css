@@ -15,7 +15,7 @@
   height: 83vmin;
   font-size: 3vmax;
 }
-.card {
+.bCard {
   display: flex;
   /* margin: 5px; */
   border: 0.2vmin solid #ccc;
@@ -31,15 +31,15 @@
   &.flip {
     transform: rotateY(0deg);
 
-    .card-face {
+    .bCard-face {
       opacity: 1;
     }
-    .card-back {
+    .bCard-back {
       opacity: 0;
     }
   }
 
-  .card-content {
+  .bCard-content {
     position: absolute;
     left: 0px;
     top: 0;
@@ -52,10 +52,10 @@
     background-position: center;
     background-size: cover;
   }
-  .card-face {
+  .bCard-face {
     opacity: 0;
   }
-  .card-back {
+  .bCard-back {
     background-image: url("./img/flowers/5.jpeg");
     opacity: 1;
   }
@@ -90,7 +90,7 @@ body {
   }
 }
 
-#main {
+#bMain {
   overflow: hidden;
   display: grid;
   grid-template-columns: 9fr 3fr;

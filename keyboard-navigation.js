@@ -49,18 +49,26 @@ class Selector {
 
   keyDownHandler(e) {
     if (e.key === "ArrowDown") {
+      e.stopPropagation();
+      e.preventDefault();
       this.selecteDirected("down");
     }
 
     if (e.key === "ArrowUp") {
+      e.stopPropagation();
+      e.preventDefault();
       this.selecteDirected("up");
     }
 
     if (e.key === "ArrowLeft") {
+      e.stopPropagation();
+      e.preventDefault();
       this.selecteDirected("left");
     }
 
     if (e.key === "ArrowRight") {
+      e.stopPropagation();
+      e.preventDefault();
       this.selecteDirected("right");
     }
   }

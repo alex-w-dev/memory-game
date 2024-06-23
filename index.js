@@ -1,5 +1,4 @@
 // Массив для хранения карточек
-let cards = [];
 let openCards = []; // Массив для отслеживания открытых карточек
 let moves = 0; // Счетчик ходов
 let pairs = 0; // Счетчик пар
@@ -18,6 +17,22 @@ const animationTime = 1000;
 const totalpossibleImages = 54;
 const maxScoreKey = "memory.maxScore";
 const selector = new Selector();
+const maximumCardsCount = 64; // 32 difficult * 2
+const allCardElems = new Array(maximumCardsCount).fill(null).map(() => {
+  const card = document.createElement("div");
+  card.className = "bCard vybirayemiy";
+  memoryGame.appendChild(card);
+  const cardFace = document.createElement("div");
+  cardFace.className = "bCard-face bCard-content";
+  cardFace.style.backgroundImage = `url('./img/rand/0.jpeg')`;
+  card.appendChild(cardFace);
+
+  const cardBack = document.createElement("div");
+  cardBack.className = "bCard-back bCard-content";
+  card.appendChild(cardBack);
+  return card;
+});
+const cardToId = new Map();
 
 const diffiults = [
   { pairs: 2, src: "./img/diff/0.jpeg", title: "Пупсик" },
@@ -25,6 +40,13 @@ const diffiults = [
   { pairs: 18, src: "./img/diff/1.jpeg", title: "Специалист" },
   { pairs: 32, src: "./img/diff/4.jpeg", title: "Эксперт" },
 ];
+
+function getCardElems(count) {
+  return allCardElems.slice(0, count).map((el) => {
+    el.style.display = "flex";
+    return el;
+  });
+}
 
 function startAnimation() {
   animation = true;
@@ -47,14 +69,16 @@ function shuffle(array) {
 }
 
 function resetGame() {
-  cards = [];
+  allCardElems.forEach((el) => {
+    el.style.display = "none";
+    el.classList.remove("flip");
+  });
   openCards = []; // Массив для отслеживания открытых карточек
   moves = 0; // Счетчик ходов
   pairs = 0; // Счетчик пар
   animation = false;
   setScore(initialScore);
   setMaxScore(localStorage.getItem(maxScoreKey) || 0);
-  memoryGame.innerHTML = "";
 }
 
 function renderDifficult() {
@@ -82,17 +106,17 @@ function decreaseDifficult() {
 }
 
 function startNewGame() {
-  main.style.display = "grid";
+  bMain.style.display = "grid";
   menu.style.display = "none";
   isMainMenu = false;
   resetGame();
   createCards();
-  selector.setSelectionContainer(main);
+  selector.setSelectionContainer(bMain);
   selector.selectSomeone();
 }
 
 function backToMainMenuHandler() {
-  main.style.display = "none";
+  bMain.style.display = "none";
   menu.style.display = "flex";
   isMainMenu = true;
   renderDifficult();
@@ -114,39 +138,30 @@ function endGame() {
 // Функция для создания карточек
 function createCards() {
   const newStyle = document.createElement("style");
-  newStyle.innerText = `.card .card-back { background-image: url('./img/flowers/${getRandomIntInclusive(
+  newStyle.innerText = `.bCard .bCard-back { background-image: url('./img/flowers/${getRandomIntInclusive(
     0,
     5
   )}.jpeg'); }`;
   document.body.appendChild(newStyle);
 
+  const cards = getCardElems(totalPairs * 2);
+  shuffle(cards);
   const imageIndexes = new Array(totalpossibleImages)
     .fill(null)
     .map((one, i) => i);
   shuffle(imageIndexes);
   for (let i = 0; i < totalPairs; i++) {
     for (let j = 0; j < 2; j++) {
-      const card = document.createElement("div");
-      card.className = "card vybirayemiy";
-      card.dataset.id = i;
-      addClickEventListener(card, flipCard);
-      cards.push(card);
+      const bCard = cards[i * 2 + j];
+      cardToId.set(bCard, i);
 
-      const cardFace = document.createElement("div");
-      cardFace.className = "card-face card-content";
+      const cardFace = bCard.querySelector(".bCard-face");
       cardFace.style.backgroundImage = `url('./img/rand/${
         imageIndexes[i % totalpossibleImages]
       }.jpeg')`;
-      card.appendChild(cardFace);
-
-      const cardBack = document.createElement("div");
-      cardBack.className = "card-back card-content";
-      card.appendChild(cardBack);
     }
   }
 
-  shuffle(cards);
-  cards.forEach((card) => memoryGame.appendChild(card));
   const template = new Array(Math.ceil(Math.sqrt(cards.length)))
     .fill("auto")
     .join(" ");
@@ -192,7 +207,7 @@ function closeExitDialog() {
   if (isMainMenu) {
     backToMainMenuHandler();
   } else {
-    selector.setSelectionContainer(main);
+    selector.setSelectionContainer(bMain);
     selector.selectSomeone();
   }
 }
@@ -236,7 +251,7 @@ function flipCard() {
 
   const lastOpened = openCards[0];
   if (lastOpened) {
-    if (lastOpened.dataset.id === this.dataset.id) {
+    if (cardToId.get(lastOpened) === cardToId.get(this)) {
       pairs++;
       openCards = [];
       setScore(score + pairScore);
@@ -259,10 +274,17 @@ function flipCard() {
 }
 
 function addClickEventListener(el, cb) {
+  function cbAdapter(e) {
+    selector.clickHandler(e);
+    cb.call(this, e);
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
   if (isTV()) {
-    el.addEventListener("ownClick", cb);
+    el.addEventListener("ownClick", cbAdapter);
   } else {
-    el.addEventListener("click", cb);
+    el.addEventListener("click", cbAdapter);
   }
 }
 function dispatchClickEvent(el) {
@@ -287,6 +309,10 @@ document.addEventListener("keydown", function (e) {
     if (selected) {
       dispatchClickEvent(selected);
     }
+    if (isTV()) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
   }
 });
 
@@ -308,6 +334,9 @@ function isTV() {
 }
 
 function initClickEvents() {
+  allCardElems.forEach((el) => {
+    addClickEventListener(el, flipCard);
+  });
   addClickEventListener(mainMenuPlayBtn, startNewGame);
   addClickEventListener(degreaseDifficultBtn, decreaseDifficult);
   addClickEventListener(increaseDifficultBtn, increaseDifficult);
