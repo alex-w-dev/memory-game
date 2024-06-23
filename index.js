@@ -15,6 +15,7 @@ const pairScore = 5;
 const failScore = 1;
 const animationTime = 1000;
 const totalpossibleImages = 54;
+const maxCardBackIndex = 5;
 const maxScoreKey = "memory.maxScore";
 const selector = new Selector();
 const maximumCardsCount = 64; // 32 difficult * 2
@@ -135,15 +136,18 @@ function endGame() {
   }, animationTime);
 }
 
+const cardBackStyle = document.createElement("style");
+document.body.appendChild(cardBackStyle);
+function changecardBacks() {
+  cardBackStyle.innerText = `.bCard .bCard-back { background-image: url('./img/flowers/${getRandomIntInclusive(
+    0,
+    maxCardBackIndex
+  )}.jpeg'); }`;
+}
+
 // Функция для создания карточек
 function createCards() {
-  const newStyle = document.createElement("style");
-  newStyle.innerText = `.bCard .bCard-back { background-image: url('./img/flowers/${getRandomIntInclusive(
-    0,
-    5
-  )}.jpeg'); }`;
-  document.body.appendChild(newStyle);
-
+  changecardBacks();
   const cards = getCardElems(totalPairs * 2);
   shuffle(cards);
   const imageIndexes = new Array(totalpossibleImages)
@@ -345,3 +349,23 @@ function initClickEvents() {
   addClickEventListener(exitGameButtonYes, exitGame);
   addClickEventListener(closeEndGameDialogBtn, closeEndGameDialog);
 }
+
+const imagesToLoad = [
+  ...diffiults.map((d) => d.src),
+  "./img/ui/bg.jpeg",
+  ...new Array(maxCardBackIndex + 1)
+    .fill(null)
+    .map((o, i) => `./img/flowers/${i}.jpeg`),
+];
+Promise.all(
+  imagesToLoad.map((src) => {
+    const img = new Image();
+    return new Promise((resolve, reject) => {
+      img.src = src;
+      img.onload = resolve;
+      img.onerror = reject;
+    });
+  })
+).then(() => {
+  loaderWindow.style.display = "none";
+});

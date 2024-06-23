@@ -1,0 +1,42 @@
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 14vmax;
+  height: 10vmax;
+  box-sizing: border-box;
+  background: conic-gradient(
+        from 135deg at top,
+        #0000,
+        #fff 1deg 90deg,
+        #0000 91deg
+      )
+      right -4vmax bottom 1.6vmax/3.2vmax 1.8vmax,
+    linear-gradient(#fff 0 0) bottom/100% 1.6vmax, #000;
+  background-repeat: no-repeat;
+  border-bottom: 1.6vmax solid #000;
+  position: relative;
+  animation: l7-0 2s infinite linear;
+}
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 2vmax;
+  height: 2.8vmax;
+  background: lightblue;
+  left: 2vmax;
+  animation: l7-1 2s infinite cubic-bezier(0, 200, 1, 200);
+}
+@keyframes l7-0 {
+  100% {
+    background-position: left -4vmax bottom 1.6vmax, bottom;
+  }
+}
+@keyframes l7-1 {
+  0%,
+  50% {
+    bottom: 1.6vmax;
+  }
+  90%,
+  100% {
+    bottom: 1.62vmax;
+  }
+}
