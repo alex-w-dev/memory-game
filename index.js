@@ -5,7 +5,7 @@ let pairs = 0; // Счетчик пар
 let animation = false;
 let score = 0;
 let maxScore = 0;
-let totalPairs = 18; // 2 / 8 / 18 / 32 / 50 / 72
+let totalPairs = parseInt(localStorage.getItem("difficult")) || 8; // 2 / 8 / 18 / 32 / 50 / 72
 let exitDialogOpened = false;
 let endGameDialogOpened = false;
 let isMainMenu = true;
@@ -90,6 +90,7 @@ function renderDifficult() {
 
 function setTotalPairs(pairs) {
   totalPairs = pairs;
+  localStorage.setItem("difficult", pairs);
   renderDifficult();
 }
 
