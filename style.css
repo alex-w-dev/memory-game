@@ -101,7 +101,7 @@ body {
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-image: url("./img/ui/bg.jpeg");
+  background-color: #838f79;
   background-position: center;
   background-size: cover;
   color: white;
